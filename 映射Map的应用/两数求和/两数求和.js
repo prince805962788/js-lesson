@@ -3,17 +3,17 @@
 // 示例: 给定 nums = [2, 7, 11, 15], target = 9
 // 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]
 
-const twoSum = (nums, target)=>{
+const twoSum = (nums, target) => {
 	const map = new Map()
-	for(let i = 0;i<nums.length;i++){
+	for (let i = 0; i < nums.length; i++) {
 		const diffs = target - nums[i]
-		if(map.has(diffs)){
-			return [map.get(diffs),i]
-		}else {
-			map.set(nums[i],i)
+		if (map.has(diffs)) {
+			return [map.get(diffs), i]
+		} else {
+			map.set(nums[i], i)
 		}
 	}
 }
 const nums = [2, 7, 11, 15, 4, 5, 23, 13]
-const res = twoSum(nums,28)
+const res = twoSum(nums, 28)
 console.log(res)
