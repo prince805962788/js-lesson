@@ -9,11 +9,11 @@ class Tree {
     let root = new Node(data.shift())
     //遍历所有的数据，逐渐插入到这课二叉搜索树中
     data.forEach(item => {
-      this.insert(root, item)
+      Tree.insert(root, item)
     });
     return root
   }
-  insert(node, data) { //创建二叉搜索树
+  static insert(node, data) { //创建二叉搜索树
     if (node.value > data) { //父节点数据大于值
       if (node.left === undefined) { //父节点左子树空，插入
         node.left = new Node(data)
@@ -57,6 +57,38 @@ class Tree {
     }
     dfs(root)
     return flag
+  }
+  //重点：二叉搜索树的中序遍历序列是有序的
+  static balanceBST(root) { //返回一个平衡的搜索二叉树,前提是已经是一个搜索二叉树
+    // 初始化中序遍历序列数组
+    const nums = []
+    // 定义中序遍历二叉树，得到有序数组
+    let inorder = root => {
+      if (!root) {
+        return
+      }
+      inorder(root.left)
+      nums.push(root.value)
+      inorder(root.right)
+    }
+    let buildAVL = (low, high) => {
+      if (low > high) {
+        return null
+      }
+      // 取数组的中间值作为根结点值
+      const mid = Math.floor(low + (high - low) / 2)
+      // 创造当前树的根结点
+      const cur = new Node(nums[mid])
+      // 构建左子树
+      cur.left = buildAVL(low, mid - 1)
+      // 构建右子树
+      cur.right = buildAVL(mid + 1, high)
+      // 返回当前树的根结点 
+      return cur
+    }
+    inorder(root)
+    console.log(nums)
+    return buildAVL(0, nums.length - 1)
   }
   static search(root, n) { //搜索某个值
     if (!root) {
@@ -105,7 +137,8 @@ class Tree {
     return root
   }
 }
-let root = new Tree([3, 5, 7, 2, 12, 4, 13, 8, 11, 9])
+let root = new Tree([5, 2, 3, 7, 1, 4, 9, 8])
 let is = Tree.walk(root)
-Tree.delete(root, 12)
-console.log(root)
+let newTree = Tree.balanceBST(root)
+// Tree.delete(root, 12)
+console.log(newTree)
