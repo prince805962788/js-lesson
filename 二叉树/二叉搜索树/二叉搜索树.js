@@ -110,11 +110,11 @@ class Tree {
       if (!root.left && !root.right) { // 若是叶子结点，则不需要想太多，直接删除
         root = null
       } else if (root.left) {
-        const maxLeft = this.findLeftMax(root) // 寻找左子树里值最大的结点
+        const maxLeft = this.findLeftMax(root.left) // 寻找左子树里值最大的结点
         root.value = maxLeft.value // 用这个 maxLeft 覆盖掉需要删除的当前结点  
         this.delete(root.left, maxLeft.value) // 覆盖动作会消耗掉原有的 maxLeft 结点
       } else {
-        const minRight = this.findRightMin(root)
+        const minRight = this.findRightMin(root.right)
         root.value = minRight.value
         this.delete(root.right, minRight.value)
       }
