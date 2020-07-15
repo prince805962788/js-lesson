@@ -9,7 +9,7 @@ class heap {
   }
   static maxHeapify(arr, i, size) { //构建一次最大堆的过程
     let left = i * 2 + 1 //左节点索引
-    let right = i * 2 + 2 //有节点索引
+    let right = i * 2 + 2 //右节点索引
     let largest = i //当前的父节点
     if (left < size && arr[left] > arr[largest]) { //如果左节点存在并且左节点大于 当前最大节点，交换位置
       largest = left
@@ -50,5 +50,5 @@ class heap {
   }
 }
 let arr = new heap([5, 4, 12, 11, 6, 8, 15, 9, 7])
-arr.sort()
+// arr.sort()
 console.log(arr)

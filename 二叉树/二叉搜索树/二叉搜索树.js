@@ -138,7 +138,8 @@ class Tree {
   }
 }
 let root = new Tree([5, 2, 3, 7, 1, 4, 9, 8])
-let is = Tree.walk(root)
+// console.log(root)
+// let is = Tree.walk(root)
 let newTree = Tree.balanceBST(root)
 // Tree.delete(root, 12)
 console.log(newTree)
