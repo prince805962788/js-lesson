@@ -40,15 +40,17 @@ class Tree {
       return true
     }
     let walk = (left, right) => {
-      if (!left || !right) { //终止条件
+      if (!left && !right) { //终止条件t
         return true
       }
-      if ((!left && right) || (left && !right) || (left.val !== right.val)) {
+      if ((!left && right) || (left && !right) || (left.value !== right.value)) {
         return false
       }
       return walk(left.left, right.right) && walk(left.right, right.left)
     }
+    return walk(root.left, root.right)
   }
 }
 const root = new Tree([1, 2, 2, 3, 4, 4, 3])
 console.log(root)
+console.log(Tree.isSummetry(root))
