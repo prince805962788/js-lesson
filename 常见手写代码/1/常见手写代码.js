@@ -27,8 +27,8 @@ console.log(res2)
 //call的实现
 Function.prototype.myCall = function (context = window) {
   context.fn = this
-  const arg = [...arguments].slice(1)
-  const result = context.fn(...arg)
+  const args = [...arguments].slice(1)
+  const result = context.fn(...args)
   delete context.fn
   return result
 }
