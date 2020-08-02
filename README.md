@@ -161,6 +161,7 @@ function platArr(arr) {
   return res
 }
 ```
+
 ## promise实现
 ```
 class myPromise {
