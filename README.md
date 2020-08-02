@@ -48,3 +48,101 @@ function New(func) {
   }
 }
 ```
+### call,apply,bind的实现
+#### call的实现
+```
+Function.prototype.myCall = function (context = window) {
+  context.fn = this
+  const args = [...arguments].slice(1)
+  const result = context.fn(...args)
+  delete context.fn
+  return result
+}
+```
+#### apply的实现
+```
+Function.prototype.myApply = function (context = window) {
+  context.fn = this
+  let result
+  if (arguments.length >= 1) {
+    result = context.fn(...arguments[1])
+  } else {
+    result = context.fn()
+  }
+  delete context.fn
+  return result
+}
+```
+#### bind的实现
+```
+Function.prototype.myBind = function (context = window) {
+  if (typeof this != "function") {
+    throw Error("not a function")
+  }
+  let fn = this
+  const args = [...arguments].slice(1) // Array.prototype.slice.call(arguments, 1)
+  let resFn = function () {
+    return fn.apply(this instanceof resFn ? this : context, args.concat(...arguments))
+  }
+  resFn.prototype = this.prototype
+  return resFn
+}
+```
+## reduce的实现
+```
+Array.prototype.myReduce = function (func, initialValue) {
+  const arr = this
+  //累加的结果值，如果没有传入的初始值，那么取数组的第一个为初始值
+  let res = initialValue === undefined ? arr[0] : initialValue
+  //开始遍历的节点位置，如果没有传入的初始值，那么从数组的第一个开始
+  const startPoint = initialValue === undefined ? 1 : 0
+  arr.slice(startPoint).forEach((val, index) => {
+    res = func(res, val, index + startPoint, arr)
+  })
+  return res
+}
+```
+## 函数柯里化
+```
+function curry(fn, args) {
+  const length = fn.length //函数fn的参数数量
+  args = args || []
+  return function () {
+    const newArgs = args.concat(Array.prototype.slice.call(arguments))
+    if (newArgs.length < length) {
+      return curry.call(this, fn, newArgs)
+    } else {
+      return fn.apply(this, newArgs);
+    }
+  }
+}
+```
+## 防抖
+```
+function debounce(fn, wait) {
+  let timer = null
+  return function () {
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, arguments) //返回当前函数所属的作用域下执行
+    }, wait)
+  }
+}
+```
+## 节流
+```
+function throttle(fn, wait) {
+  let timer = null
+  return function () {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(this, arguments)
+        timer = null
+      }, wait)
+    }
+  }
+}
+```
