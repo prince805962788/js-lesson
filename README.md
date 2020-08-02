@@ -147,6 +147,7 @@ function throttle(fn, wait) {
   }
 }
 ```
+
 ### 数组扁平化
 ```
 function platArr(arr) {
