@@ -48,8 +48,7 @@ function New(func) {
   }
 }
 ```
-### call,apply,bind的实现
-#### call的实现
+### call的实现
 ```
 Function.prototype.myCall = function (context = window) {
   context.fn = this
@@ -59,7 +58,7 @@ Function.prototype.myCall = function (context = window) {
   return result
 }
 ```
-#### apply的实现
+### apply的实现
 ```
 Function.prototype.myApply = function (context = window) {
   context.fn = this
@@ -73,7 +72,7 @@ Function.prototype.myApply = function (context = window) {
   return result
 }
 ```
-#### bind的实现
+### bind的实现
 ```
 Function.prototype.myBind = function (context = window) {
   if (typeof this != "function") {
