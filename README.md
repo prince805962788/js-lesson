@@ -5,6 +5,9 @@
 [promise实现](#promise实现)
 
 [网络基础](#网络基础)
+
+[数据结构](#数据结构)
+- [链表](#链表)
 ## 手写代码
 ### es5继承
 ```
@@ -324,3 +327,25 @@ TCP 如何保证传输的可靠性
 - 应答机制：当接收端接收到数据之后，将发送确认信息。
 - 超时重发：当发送端发出数据后，它启动一个定时器，如果超出计时器的时限，将重发这个报文段。
 - 流量控制：前面提到过，TCP 连接的每一方都有固定大小的缓冲空间，可防止接收端缓冲区溢出，这就是流量控制。TCP 使用可变大小的滑动窗口协议来进行流量控制。
+## 数据结构
+### 链表
+#### 链表生成
+```
+class Node {
+  constructor(data) {
+    this.value = data
+    this.next = undefined
+  }
+}
+class NodeList {
+  constructor(arr) {
+    let head = new Node(arr.shift())
+    let next = head
+    arr.forEach(item => {
+      next.next = new Node(item)
+      next = next.next
+    });
+    return head
+  }
+}
+```
