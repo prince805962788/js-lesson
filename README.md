@@ -88,7 +88,7 @@ Function.prototype.myBind = function (context = window) {
   return resFn
 }
 ```
-## reduce的实现
+### reduce的实现
 ```
 Array.prototype.myReduce = function (func, initialValue) {
   const arr = this
@@ -102,7 +102,7 @@ Array.prototype.myReduce = function (func, initialValue) {
   return res
 }
 ```
-## 函数柯里化
+### 函数柯里化
 ```
 function curry(fn, args) {
   const length = fn.length //函数fn的参数数量
@@ -117,7 +117,7 @@ function curry(fn, args) {
   }
 }
 ```
-## 防抖
+### 防抖
 ```
 function debounce(fn, wait) {
   let timer = null
@@ -132,7 +132,7 @@ function debounce(fn, wait) {
   }
 }
 ```
-## 节流
+### 节流
 ```
 function throttle(fn, wait) {
   let timer = null
@@ -144,5 +144,18 @@ function throttle(fn, wait) {
       }, wait)
     }
   }
+}
+```
+### 数组扁平化
+```
+function platArr(arr) {
+  const res = []
+  const plat = arr => {
+    arr.map(item => {
+      Array.isArray(item) ? plat(item) : res.push(item)
+    })
+  }
+  plat(arr)
+  return res
 }
 ```
