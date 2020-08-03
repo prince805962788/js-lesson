@@ -1,15 +1,36 @@
-//实现一个reduce
-Array.prototype.myReduce = function(func, initialValue) {
-  let arr = this
-  let base = typeof initialValue === 'undefined' ? arr[0] : initialValue
-  let startPoint = typeof initialValue === 'undefined' ? 1 : 0
-  arr.slice(startPoint)
-      .forEach((val, index)=> {
-          base = func(base, val, index + startPoint, arr)
-      })
-  return base
+class Node {
+  constructor(data) {
+    this.value = data
+    this.next = undefined
+  }
 }
-let res = [1,2,3,4].myReduce((prev,cur)=>{
-	return prev+cur
-})
-console.log(res)
+class NodeList {
+  constructor(arr) {
+    const head = new Node(arr.shift())
+    let next = head
+    arr.forEach(item => {
+      next.next = new Node(item)
+      next = next.next
+    });
+  }
+}
+
+function deleteDuplicates(head) {
+  if (!head || !head.next) {
+    return
+  }
+  const dummy = new Node()
+  dummy.next = head
+  const cur = head
+  while (cur.next || cur.next.next) {
+    if (cur.next.value = cur.next.next.value) {
+      const val = cur.next.value
+      while (cur.next && cur.next.value === val) {
+        cur.next = cur.next.next
+      }
+    } else {
+      cur = cur.next
+    }
+  }
+  return dummy.next;
+}
