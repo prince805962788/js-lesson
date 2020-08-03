@@ -410,3 +410,33 @@ deleteDuplicates(head) {
   return dummy.next;
 }
 ```
+#### 合并两个有序链表
+```
+mergeTwoLists(l1, l2) {
+  if (!l1) return l2
+  if (!l2) return l1
+  let head = new Node()
+  if (l1.value < l2.value) {
+    head = l1
+    l1.next = NodeList.mergeTwoLists(l1.next, l2)
+  } else {
+    head = l2
+    l2.next = NodeList.mergeTwoLists(l1, l2.next)
+  }
+  return head
+}
+```
+#### 判断链表是否有环
+```
+isCircle(head) {
+  while (head) {
+    if (head.flag) {
+      return head // 如果 flag 已经立过了，那么说明环存在,并返回环形链表所在的节点
+    } else {
+      head.flag = true // 如果 flag 没立过，就立一个 flag 再往
+      head = head.next
+    }
+  }
+  return false
+}
+```
