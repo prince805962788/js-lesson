@@ -366,3 +366,103 @@ class NodeList {
   }
 }
 ```
+#### 删除倒数第n个节点
+```
+removeNthFromEnd(head, n) {
+  let dummy = new Node()
+  dummy.next = head
+  let fast = dummy
+  let slow = dummy
+  while(n>0){
+    fast = fast.next
+    n--
+  }
+  while(fast.next){
+    fast = fast.next
+    slow = slow.next
+  }
+  if(!fast.next){
+    slow.next = slow.next.next
+  }
+  return dummy.next
+}
+```
+#### 删除重复节点
+```
+deleteDuplicates(head) {
+  // 极端情况：0个或1个结点，则不会重复，直接返回
+  if (!head || !head.next) {
+    return
+  }
+  let dummy = new Node() // dummy 永远指向头结点
+  dummy.next = head
+  let cur = dummy
+  while (cur.next && cur.next.next) { // 当 cur 的后面有至少两个结点时，第一个cur.next是头结点
+    if (cur.next.value === cur.next.next.value) {
+      let val = cur.next.value // 若值重复，则记下这个值
+      while (cur.next && cur.next.value === val) { //开始遍历删除这个值
+        cur.next = cur.next.next
+      }
+    } else {
+      cur = cur.next //正常遍历
+    }
+  }
+  return dummy.next;
+}
+```
+#### 合并两个有序链表
+```
+mergeTwoLists(l1, l2) {
+  if (!l1) return l2
+  if (!l2) return l1
+  let head = new Node()
+  if (l1.value < l2.value) {
+    head = l1
+    l1.next = NodeList.mergeTwoLists(l1.next, l2)
+  } else {
+    head = l2
+    l2.next = NodeList.mergeTwoLists(l1, l2.next)
+  }
+  return head
+}
+```
+#### 判断链表是否有环
+```
+isCircle(head) {
+  while (head) {
+    if (head.flag) {
+      return head // 如果 flag 已经立过了，那么说明环存在,并返回环形链表所在的节点
+    } else {
+      head.flag = true // 如果 flag 没立过，就立一个 flag 再往
+      head = head.next
+    }
+  }
+  return false
+}
+```
+#### 反转列表
+```
+reverseList(head) { //迭代反转链表
+  if (head === null || head.next === null) { // 链表为空或只有一个节点时，不用反转
+    return head;
+  }
+  let pre = null // 初始化前驱结点为 null
+  let cur = head // 初始化目标结点为头结点
+  while (cur) {
+    let next = cur.next // 记录一下 next 结点
+    cur.next = pre // 反转指针
+    pre = cur // pre 往前走一步
+    cur = next // cur往前走一步
+  }
+  return pre
+}
+reverseList(head) { //递归反转链表
+ if (!head || !head.next) { // 链表为空或只有一个节点时，不用反转
+    return head;
+  }
+  let newHead = NodeList.reverseList2(head.next) //当前节点反转之前，先让后续节点反转
+  head.next.next = head
+  head.next = null
+  return newHead //newHead为新的头结点，并依次向下传递
+}
+```
