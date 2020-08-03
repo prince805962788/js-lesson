@@ -440,3 +440,29 @@ isCircle(head) {
   return false
 }
 ```
+#### 反转列表
+```
+reverseList(head) { //迭代反转链表
+  if (head === null || head.next === null) { // 链表为空或只有一个节点时，不用反转
+    return head;
+  }
+  let pre = null // 初始化前驱结点为 null
+  let cur = head // 初始化目标结点为头结点
+  while (cur) {
+    let next = cur.next // 记录一下 next 结点
+    cur.next = pre // 反转指针
+    pre = cur // pre 往前走一步
+    cur = next // cur往前走一步
+  }
+  return pre
+}
+reverseList(head) { //递归反转链表
+  if(!head || !head.next){
+    return head
+  }
+  reverseList2(head.next)
+  head.next.next = head
+  head.next = null
+  return head
+}
+```
