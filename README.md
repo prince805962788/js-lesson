@@ -6,6 +6,8 @@
 
 [网络基础](#网络基础)
 
+[vue](#vue)
+
 [数据结构](#数据结构)
 - [链表](#链表)
 ## 手写代码
@@ -327,6 +329,21 @@ TCP 如何保证传输的可靠性
 - 应答机制：当接收端接收到数据之后，将发送确认信息。
 - 超时重发：当发送端发出数据后，它启动一个定时器，如果超出计时器的时限，将重发这个报文段。
 - 流量控制：前面提到过，TCP 连接的每一方都有固定大小的缓冲空间，可防止接收端缓冲区溢出，这就是流量控制。TCP 使用可变大小的滑动窗口协议来进行流量控制。
+
+## vue
+### vue全局概览
+1. new Vue()
+2. _init(调用 _init 函数进行初始化，它会初始化生命周期、事件、 props、 methods、 data、 computed 与 watch 等)(通过 Object.defineProperty 设置 setter 与 getter 函数，用来实现「响应式」以及「依赖收集」)
+3. $mount (挂载组件)
+4. compile编译可以分成 parse、optimize 与 generate 三个阶段，最终需要得到 render function
+     - parse 会用正则等方式解析 template 模板中的指令、class、style等数据，形成AST
+     - optimize 的主要作用是标记 static 静态节点，patch的过程中， diff 算法会直接跳过静态节点，从而减少了比较的过程，优化了 patch 的性能
+     - generate 是将 AST 转化成 render function 字符串的过程，得到结果是 render 的字符串以及 staticRenderFns 字符串
+     - 经历过 parse、optimize 与 generate 这三个阶段以后，组件中就会存在渲染 VNode 所需的 render function
+5. 响应式：
+     - 当 render function 被渲染的时候，因为会读取所需对象的值，所以会触发 getter 函数进行「依赖收集」，「依赖收集」的目的是将观察者 Watcher 对象存放到当前闭包中的订阅者 Dep 的 subs 中
+     - 在修改对象的值的时候，会触发对应的 setter， setter 通知之前「依赖收集」得到的 Dep 中的每一个 Watcher，告诉它们自己的值改变了，需要重新渲染视图。这时候这些 Watcher 就会开始调用 update 来更新视图
+
 ## 数据结构
 ### 链表
 #### 链表生成
