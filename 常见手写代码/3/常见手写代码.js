@@ -30,13 +30,13 @@ var debounceRun = throttle(function () {
 window.addEventListener('mousemove', debounceRun)
 
 //实现一个reduce
-Array.prototype.myReduce = function(func, initialValue) {
-  var arr = this
-  var base = typeof initialValue === 'undefined' ? arr[0] : initialValue
-  var startPoint = typeof initialValue === 'undefined' ? 1 : 0
+Array.prototype.myReduce = function (func, initialValue) {
+  const arr = this
+  const base = typeof initialValue === 'undefined' ? arr[0] : initialValue
+  const startPoint = typeof initialValue === 'undefined' ? 1 : 0
   arr.slice(startPoint)
-      .forEach(function(val, index) {
-          base = func(base, val, index + startPoint, arr)
-      })
+    .forEach(function (val, index) {
+      base = func(base, val, index + startPoint, arr)
+    })
   return base
 }
