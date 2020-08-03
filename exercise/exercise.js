@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 class Node {
   constructor(data) {
     this.value = data
@@ -36,4 +34,3 @@ function deleteDuplicates(head) {
   }
   return dummy.next;
 }
->>>>>>> 5ade4c2e4f31f6a994bee4ddd923bba84fff7711
