@@ -463,6 +463,6 @@ reverseList(head) { //递归反转链表
   let newHead = NodeList.reverseList2(head.next) //当前节点反转之前，先让后续节点反转
   head.next.next = head
   head.next = null
-  return newHead
+  return newHead //newHead为新的头结点，并依次向下传递
 }
 ```
