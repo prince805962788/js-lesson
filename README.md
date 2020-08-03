@@ -419,6 +419,17 @@ if (Array.isArray(options.plugins)) {
 }
 ```
 
+### webpack如何查找依赖
+- 绝对路径
+     比如require('/home/me/file')。 此时会首先检查参数目标是否为目录，如果是目录，则检查package.json的main字段。
+     如果没有package.json或者没有main字段，则会用index作为文件名。
+- 相对路径
+     比如require('./file')。使用当前路径或配置文件中的context作为相对路径的目录。加载过程和绝对路径相似。
+- 模块路径
+     如require('module/lib/file')。会在配置文件中的所有查找目录中查找。
+     对于复杂的模块路径，还可以设置别名(resolve.alias)。
+     一个路径解析配置的例子： resolve.extensions
+     
 ## 数据结构
 ### 链表
 #### 链表生成
