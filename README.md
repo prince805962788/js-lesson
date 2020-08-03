@@ -457,12 +457,12 @@ reverseList(head) { //迭代反转链表
   return pre
 }
 reverseList(head) { //递归反转链表
-  if (!head || !head.next) { // 链表为空或只有一个节点时，不用反转
+ if (!head || !head.next) { // 链表为空或只有一个节点时，不用反转
     return head;
   }
-  NodeList.reverseList2(head.next) //当前节点反转之前，先让后续节点反转
+  let newHead = NodeList.reverseList2(head.next) //当前节点反转之前，先让后续节点反转
   head.next.next = head
   head.next = null
-  return head
+  return newHead
 }
 ```
