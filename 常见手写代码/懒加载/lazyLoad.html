@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="imgWarp">
+    <div class="img-area">
+      <img class="lazyload" alt="loading" data-src="./1.jpg">
+    </div>
+    <div class="img-area">
+      <img class="lazyload" alt="loading" data-src="./2.jpg">
+    </div>
+    <div class="img-area">
+      <img class="lazyload" alt="loading" data-src="./3.jpg">
+    </div>
+    <div class="img-area">
+      <img class="lazyload" alt="loading" data-src="./4.jpg">
+    </div>
+    <div class="img-area">
+      <img class="lazyload" alt="loading" data-src="./1.jpg">
+    </div>
+  </div>
+  <script>
+    (function Observer() {
+      let observer = new IntersectionObserver(entries => {
+        entries.forEach(item => {
+          if (item.isIntersecting) {
+            item.target.src = item.target.dataset.src; // 开始加载图片,把data-origin的值放到src
+            observer.unobserve(item.target); // 停止监听已开始加载的图片
+          }
+        });
+      }, {
+        rootMargin: "0px 0px -100px 0px" // 交叉过视图的100，才开始派发事件
+      });
+      let images = document.querySelectorAll(".lazyload");
+      images.forEach(item => observer.observe(item));
+    })()
+  </script>
+</body>
+<style>
+  .imgWarp {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1000px;
+
+  }
+
+  .lazyload {
+    margin-top: 30px;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    position: relative;
+  }
+
+  .lazyload:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #ccc;
+  }
+</style>
+
+</html>
