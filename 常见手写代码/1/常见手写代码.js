@@ -1,5 +1,5 @@
 //new的实现
-function New(func) {
+function New (func) {
   const res = {}
   if (func.prototype !== null) { //如果构造函数不为空
     res.__proto__ = func.prototype //实力的原形对象指向构造函数的原形
@@ -7,7 +7,7 @@ function New(func) {
   const args = Array.prototype.slice.call(arguments, 1) //取出除去构造函数的剩余参数
   const funcRes = func.apply(res, args) //使用构造函数func在res作用域下执行
   //如果函数没有返回对象类型Object(包含Functoin, Array, Date, RegExg, Error)，那么new表达式中的函数调用会自动返回这个新的对象。
-  if (typeof funcRes === 'object' || typeof funcRes === 'null' || typeof funcRes === 'function') {
+  if (typeof funcRes === 'object' || typeof funcRes === 'function') {
     return funcRes
   } else {
     return res
@@ -15,7 +15,7 @@ function New(func) {
 }
 console.log('--------New的实现--------')
 
-function setObj(name, gender) {
+function setObj (name, gender) {
   this.name = name
   this.gender = gender
 }
