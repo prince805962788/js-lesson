@@ -30,9 +30,10 @@ function reactive (obj) {
   })
   return observed
 }
-// 保存当前活动响应函数作为getter和effect之间桥梁 
+// 副作用函数栈
 const effectStack = []
-// effect任务:执行fn并将其入栈 
+// 当我们向effect中传递一个原始的函数的时候，会立即执行一次
+// 如果函数中有对响应式数据的访问操作的话，此时会将当前的effect作为依赖收集到访问属性的依赖集合中
 function effect (fn) {
   const rxEffect = function () { // 1.捕获可能的异常
     try {
@@ -95,7 +96,6 @@ function trigger (target, key) {
 
 
 // 测试代码
-debugger
 const state = reactive({ name: '张三' })
 // 第一次取值打印出张三，当state.name修改之后，就打印出李四了
 effect(() => console.log(state.name)) 
