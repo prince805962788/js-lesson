@@ -1,5 +1,5 @@
 class myPromise {
-  constructor(executor) {
+  constructor (executor) {
     this.value = undefined
     this.reason = undefined
     this.status = 'pending'
@@ -29,7 +29,7 @@ class myPromise {
       reject(error)
     }
   }
-  then(onFulfilled, onRejected) {
+  then (onFulfilled, onRejected) {
     onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
     onRejected = typeof onRejected === 'function' ? onFulfilled : err => {
       throw err

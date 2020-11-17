@@ -1,11 +1,11 @@
 class Limit {
-  constructor(n) {
+  constructor (n) {
     this.limit = n
     this.count = 0
     this.queue = []
   }
 
-  enqueue(fn) {
+  enqueue (fn) {
     // 关键代码: fn, resolve, reject 统一管理
     return new Promise((resolve, reject) => {
       this.queue.push({
@@ -16,7 +16,7 @@ class Limit {
     })
   }
 
-  dequeue() {
+  dequeue () {
     if (this.count < this.limit && this.queue.length) {
       // 等到 Promise 计数器小于阈值时，则出队执行
       const {
@@ -29,7 +29,7 @@ class Limit {
   }
 
   // async/await 简化错误处理
-  async run(fn) {
+  async run (fn) {
     this.count++
     // 维护一个计数器
     const value = await fn()
@@ -39,7 +39,7 @@ class Limit {
     return value
   }
 
-  build(fn) {
+  build (fn) {
     if (this.count < this.limit) {
       // 如果没有到达阈值，直接执行
       return this.run(fn)

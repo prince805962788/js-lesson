@@ -1,18 +1,18 @@
 class Node {
-  constructor(data) {
+  constructor (data) {
     this.value = data
     this.left = this.right = undefined
   }
 }
 class Tree { //生成一个二叉搜索树做实验
-  constructor(data) {
+  constructor (data) {
     let root = new Node(data.shift())
     data.forEach(item => {
       this.insert(root, item)
     });
     return root
   }
-  insert(node, data) {
+  insert (node, data) {
     if (data < node.value) {
       if (node.left === undefined) {
         node.left = new Node(data)
@@ -27,12 +27,12 @@ class Tree { //生成一个二叉搜索树做实验
       }
     }
   }
-  static invertTree(root) {
+  static invertTree (root) {
     if (!root) {
       return
     }
-    let right = this.invertTree(root.right)
-    let left = this.invertTree(root.left)
+    let right = Tree.invertTree(root.right)
+    let left = Tree.invertTree(root.left)
     root.left = right
     root.right = left
     return root

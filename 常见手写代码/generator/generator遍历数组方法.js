@@ -1,15 +1,15 @@
-function fn1(){
+function fn1 () {
   console.log(1)
 }
-function fn2(){
+function fn2 () {
   console.log(2)
 }
-function fn3(){
+function fn3 () {
   console.log(3)
 }
-function *showNumber(){
-  const arr = [fn1,fn2,fn3]
-  for(item of arr){
+function *showNumber () {
+  const arr = [fn1, fn2, fn3]
+  for(let item of arr) {
     yield item()
   }
 }

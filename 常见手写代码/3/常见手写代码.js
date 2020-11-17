@@ -1,5 +1,5 @@
 //防抖 debounce
-function debounce(fn, wait) {
+function debounce (fn, wait) {
   let timer = null
   return function () {
     if (timer) {
@@ -12,7 +12,7 @@ function debounce(fn, wait) {
   }
 }
 //节流 throttle
-function throttle(fn, wait) {
+function throttle (fn, wait) {
   let timer = null
   return function () {
     if (!timer) {
@@ -32,7 +32,7 @@ window.addEventListener('mousemove', debounceRun)
 //实现一个reduce
 Array.prototype.myReduce = function (func, initialValue) {
   const arr = this
-  const base = typeof initialValue === 'undefined' ? arr[0] : initialValue
+  let base = typeof initialValue === 'undefined' ? arr[0] : initialValue
   const startPoint = typeof initialValue === 'undefined' ? 1 : 0
   arr.slice(startPoint)
     .forEach(function (val, index) {

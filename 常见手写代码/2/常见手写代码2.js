@@ -1,9 +1,9 @@
 //寄生组合式继承
-function Parent(name) {
+function Parent (name) {
   this.name = name
 }
 
-function Child(name, age) {
+function Child (name, age) {
   Parent.call(this, name)
   this.age = age
 }
@@ -13,7 +13,7 @@ let parent = new Parent('lee')
 let child = new Child('prince', 23)
 console.log(parent, child, child instanceof Parent)
 //数组扁平化
-function platArr(arr) {
+function platArr (arr) {
   const res = []
   const plat = arr => {
     arr.map(item => {
@@ -27,7 +27,7 @@ const arr = [1, 2, [3, 4, [5, 6]], 7, 8]
 console.log('------------数组扁平化------------')
 console.log(platArr(arr))
 //函数柯里化
-function curry(fn, args) {
+function curry (fn, args) {
   const length = fn.length //函数fn的参数数量
   args = args || []
   return function () {
@@ -40,17 +40,17 @@ function curry(fn, args) {
   }
 }
 
-function multiFn(a, b, c) {
+function multiFn (a, b, c) {
   return a * b * c;
 }
 
 const multi = curry(multiFn);
-multi(2)(3)(4);
+console.log(multi(2)(3)(4))
 //实现一个intanceof
-function intanceof(l, r) {
-  const left = l.__proto
-  const right = r.prototype
-  while (true) {
+function intanceof (l, r) {
+  let left = l.__proto
+  let right = r.prototype
+  while (1) {
     if (left === null) return false
     if (left === right) return true
     left = left.__proto__
