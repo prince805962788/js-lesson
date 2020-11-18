@@ -1,38 +1,26 @@
-async function fn(args) {
-  // ...
-}
-// 等同于
-function fn(args) {
-  return spawn(function* () {
-    // ...
-  });
-}
-
-function spawn(genF) {
-  return new Promise((resolve, reject) => {
-    const gen = genF() // 先将Generator函数执行下，拿到遍历器对象
-    function step(nextF) {
-      let next
-      try {
-        next = nextF()
-      } catch (e) {
-        return reject(e)
+function generator2promise (generatorFn) {
+  return function () {
+    var gen = generatorFn.apply(this, arguments);
+    return new Promise(function (resolve, reject) {
+      function step (key, arg) {
+        try {
+          var info = gen[key](arg);
+          var value = info.value;
+        } catch (error) {
+          reject(error);
+          return;
+        }
+        if (info.done) {
+          resolve(value);
+        } else {
+          return Promise.resolve(value).then(function (value) {
+            step("next", value);
+          }, function (err) {
+            step("throw", err);
+          });
+        }
       }
-      if (next.done) {
-        return resolve(next.value)
-      }
-      Promise.resolve(next.value).then((v) => {
-        step(() => {
-          return gen.next(v)
-        })
-      }, (e) => {
-        step(() => {
-          return gen.throw(e)
-        })
-      })
-    }
-    step(() => {
-      return gen.next(undefined)
-    })
-  })
+      return step("next");
+    });
+  };
 }
