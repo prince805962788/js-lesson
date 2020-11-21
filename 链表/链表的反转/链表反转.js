@@ -1,11 +1,11 @@
 class Node { //声明链表的节点
-  constructor(data) {
+  constructor (data) {
     this.value = data
     this.next = undefined
   }
 }
 class NodeList { //声明链表结构
-  constructor(arr) {
+  constructor (arr) {
     let head = new Node(arr.shift())
     let next = head
     arr.forEach(item => {
@@ -14,7 +14,7 @@ class NodeList { //声明链表结构
     });
     return head
   }
-  static reverseList(head) { //迭代反转链表
+  static reverseList (head) { //迭代反转链表
     if (head === null || head.next === null) { // 链表为空或只有一个节点时，不用反转
       return head;
     }
@@ -28,7 +28,7 @@ class NodeList { //声明链表结构
     }
     return pre
   }
-  static reverseList2(head) { //递归反转链表
+  static reverseList2 (head) { //递归反转链表
     if (!head || !head.next) { // 链表为空或只有一个节点时，不用反转
       return head;
     }
