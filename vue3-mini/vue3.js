@@ -96,7 +96,10 @@ function trigger (target, key) {
 
 
 // 测试代码
-const state = reactive({ name: '张三' })
+// const state = reactive({ name: '张三' })
 // 第一次取值打印出张三，当state.name修改之后，就打印出李四了
-effect(() => console.log(state.name)) 
-state.name = '李四'
+// effect(() => console.log(state.name)) 
+// state.name = '李四'
+const data = reactive([])
+effect(() => console.log(data[1]))
+data.push(2)
