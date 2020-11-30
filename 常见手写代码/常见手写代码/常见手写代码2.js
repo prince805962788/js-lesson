@@ -46,6 +46,22 @@ function multiFn (a, b, c) {
 
 const multi = curry(multiFn);
 console.log(multi(2)(3)(4))
+
+//函数递归调用输出
+let num = []
+function A (n) {
+  num.push(n)
+  return function () {
+    if(arguments.length > 0) {
+      return A.apply(this, [...arguments])
+    }else {
+      return num.reduce((a, b) => a + b)
+    }
+  }
+}
+const res = A(1)(2)(3)(4)()
+console.log(res)
+
 //实现一个intanceof
 function intanceof (l, r) {
   let left = l.__proto
