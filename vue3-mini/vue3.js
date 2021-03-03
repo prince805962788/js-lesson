@@ -39,7 +39,7 @@ function effect (fn) {
     try {
       // 2.入栈，用于后续依赖收集 
       effectStack.push(rxEffect)
-      // 3.运行fn，触发依赖收集 
+      // 3.运行fn，会再次访问到变量重新触发track函数，触发依赖收集 
       return fn()
     } finally {
       // 4.执行结束，出栈

@@ -1,7 +1,7 @@
 class Node {
   constructor (val) {
-    Tree.value = val
-    Tree.left = Tree.right = undefined
+    this.value = val
+    this.left = this.right = undefined
   }
 }
 class Tree {
@@ -44,7 +44,7 @@ class Tree {
     let flag = true // 立一个flag，只要有一个高度差绝对值大于1，这个flag就会被置为false
     let dfs = root => {
       // 如果是空树，高度记为0；如果flag已经false了，那么就没必要往下走了，直接return
-      if (!root && !flag) {
+      if (!root || !flag) {
         return 0
       }
       let left = dfs(root.left) // 计算左子树的高度
