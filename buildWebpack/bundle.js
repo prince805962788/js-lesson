@@ -74,3 +74,4 @@ const content = bundle('./src/index.js')
 console.log(content)
 fs.mkdirSync('./dist');
 fs.writeFileSync('./dist/bundle.js',content)
+// node bundle.js
