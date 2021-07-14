@@ -1,11 +1,11 @@
 class Node {
-  constructor(data) {
+  constructor (data) {
     this.val = data
     this.left = this.right = undefined
   }
 }
 class NodeList {
-  constructor(arr) { //层序构建二叉树
+  constructor (arr) { //层序构建二叉树
     if (!arr || arr.length === 0) {
       return
     }
@@ -26,7 +26,7 @@ class NodeList {
     }
     return root
   }
-  static levelOrder(root) { //层序遍历二叉树
+  static levelOrder (root) { //层序遍历二叉树
     const res = []
     if (!root) {
       return
@@ -44,7 +44,7 @@ class NodeList {
     }
     return res
   }
-  static maxDepth(root) {
+  static maxDepth (root) {
     if (!root) {
       return 0
     }

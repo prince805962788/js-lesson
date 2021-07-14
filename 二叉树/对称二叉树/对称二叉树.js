@@ -1,12 +1,12 @@
 //二叉树的节点定义
 class Node {
-  constructor(val) {
+  constructor (val) {
     this.value = val
     this.left = this.right = undefined
   }
 }
 class Tree {
-  constructor(data) {
+  constructor (data) {
     //临时存储所有节点，方便寻找父子节点
     let nodeList = []
     //顶节点
@@ -35,7 +35,7 @@ class Tree {
     nodeList = []
     return root
   }
-  static isSummetry(root) { //镜像对比
+  static isSummetry (root) { //镜像对比
     if (!root) {
       return true
     }

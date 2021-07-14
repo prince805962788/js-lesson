@@ -30,8 +30,8 @@ class myPromise {
     }
   }
   then (onFulfilled, onRejected) {
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
-    onRejected = typeof onRejected === 'function' ? onFulfilled : err => {
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (value) => value
+    onRejected = typeof onRejected === 'function' ? onFulfilled : (err) => {
       throw err
     }
     const promise = new myPromise((resolve, reject) => {

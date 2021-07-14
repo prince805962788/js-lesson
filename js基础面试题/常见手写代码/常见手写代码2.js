@@ -14,6 +14,7 @@ let child = new Child('prince', 23)
 console.log(parent, child, child instanceof Parent)
 //数组扁平化
 function platArr (arr) {
+  
   const res = []
   const plat = arr => {
     arr.map(item => {
